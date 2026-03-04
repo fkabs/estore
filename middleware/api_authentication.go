@@ -28,7 +28,7 @@ func ProtectApi(handler JWTHandlerFunc) http.HandlerFunc {
 		}
 
 		uDec, _ := base64.URLEncoding.DecodeString(basicAuth)
-		creds := strings.Split(string(uDec), ":")
+		creds := strings.SplitN(string(uDec), ":", 2)
 
 		if len(creds) < 2 {
 			logrus.WithField("error", "basicAuth").Printf("No User:Password in request!")
